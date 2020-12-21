@@ -2,6 +2,7 @@ mod eight;
 mod five;
 mod four;
 mod io;
+mod nine;
 mod one;
 mod seven;
 mod six;
@@ -70,6 +71,13 @@ enum App {
         #[structopt(help = "Path to the file containing game device debug info")]
         path: PathBuf,
     },
+    #[structopt(about = "Runs the ninth day's exercise(s)")]
+    Nine {
+        #[structopt(parse(from_os_str))]
+        #[structopt(default_value = "data/xmas-encoded.txt")]
+        #[structopt(help = "Path to the file containing XMAS encrypted data")]
+        path: PathBuf,
+    },
 }
 
 fn main() -> Result<(), ParseIntError> {
@@ -83,5 +91,6 @@ fn main() -> Result<(), ParseIntError> {
         App::Six { path } => six::cmd(path),
         App::Seven { path } => seven::cmd(path),
         App::Eight { path } => eight::cmd(path),
+        App::Nine { path } => nine::cmd(path),
     };
 }
