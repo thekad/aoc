@@ -8,6 +8,7 @@ pub fn cmd(path: PathBuf) -> Result<(), ParseIntError> {
     let mut prev3: i32 = 0;
     let mut readings: Vec<i32> = Vec::new();
 
+    // read it into a Vec first to slice it down below
     if let Ok(lines) = crate::io::read_lines(path) {
         for line in lines {
             if let Ok(line) = line {

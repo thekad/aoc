@@ -1,5 +1,5 @@
-mod day01;
 mod io;
+mod one;
 use std::num::ParseIntError;
 use std::path::PathBuf;
 use structopt::StructOpt;
@@ -10,7 +10,7 @@ enum App {
     #[structopt(name = "01", about = "Runs the first day's exercise(s)")]
     One {
         #[structopt(parse(from_os_str))]
-        #[structopt(default_value = "data/day01.txt")]
+        #[structopt(default_value = "data/one.txt")]
         #[structopt(help = "Path to the expense report")]
         path: PathBuf,
     },
@@ -19,6 +19,6 @@ enum App {
 fn main() -> Result<(), ParseIntError> {
     let args = App::from_args();
     return match args {
-        App::One { path } => day01::cmd(path),
+        App::One { path } => one::cmd(path),
     };
 }
