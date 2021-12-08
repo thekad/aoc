@@ -11,10 +11,8 @@ pub fn cmd(path: PathBuf) -> Result<(), ParseIntError> {
     // read it into a Vec first to slice it down below
     if let Ok(lines) = crate::io::read_lines(path) {
         for line in lines {
-            if let Ok(line) = line {
-                if let Ok(num) = line.parse() {
-                    readings.push(num);
-                }
+            if let Ok(num) = line.parse() {
+                readings.push(num);
             }
         }
     }
