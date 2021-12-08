@@ -20,6 +20,12 @@ pub fn cmd(path: PathBuf) -> Result<(), ParseIntError> {
     }
 
     for (idx, reading) in readings.iter().enumerate() {
+        if prev != 0 && reading > &prev {
+            println!("Individual reading increased from {} to {}", prev, reading);
+            counter += 1;
+        }
+        prev = *reading;
+
         // only read a triplet if there's enough of them
         if idx + 3 <= readings.len() {
             let triplet: &[i32] = &readings[idx..idx + 3];
@@ -30,11 +36,6 @@ pub fn cmd(path: PathBuf) -> Result<(), ParseIntError> {
             }
             prev3 = sum3;
         }
-        if prev != 0 && reading > &prev {
-            println!("Individual reading increased from {} to {}", prev, reading);
-            counter += 1;
-        }
-        prev = *reading;
     }
 
     println!("Individual depth readings increased {:?} times", counter);
