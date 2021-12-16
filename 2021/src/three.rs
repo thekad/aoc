@@ -48,7 +48,7 @@ fn reduce_readings(common: bool, length: usize, mut readings: HashMap<String, bo
 pub fn cmd(path: PathBuf) -> Result<(), ParseIntError> {
     let mut diags: HashMap<String, bool> = HashMap::new();
 
-    // read diagnostics report into a matrix
+    // read diagnostics report into a hashmap
     let lines = crate::io::read_lines(path).unwrap();
     let length = lines[0].len();
     for line in lines {
