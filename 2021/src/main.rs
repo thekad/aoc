@@ -1,5 +1,6 @@
 mod io;
 mod one;
+mod three;
 mod two;
 use std::num::ParseIntError;
 use std::path::PathBuf;
@@ -22,6 +23,13 @@ enum App {
         #[structopt(help = "Path to the nav map file")]
         path: PathBuf,
     },
+    #[structopt(name = "three", about = "Runs the third day's exercise(s)")]
+    Three {
+        #[structopt(parse(from_os_str))]
+        #[structopt(default_value = "data/three.txt")]
+        #[structopt(help = "Path to the nav map file")]
+        path: PathBuf,
+    },
 }
 
 fn main() -> Result<(), ParseIntError> {
@@ -29,5 +37,6 @@ fn main() -> Result<(), ParseIntError> {
     return match args {
         App::One { path } => one::cmd(path),
         App::Two { path } => two::cmd(path),
+        App::Three { path } => three::cmd(path),
     };
 }
