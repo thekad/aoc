@@ -68,7 +68,7 @@ pub fn cmd(path: PathBuf) -> Result<(), ParseIntError> {
     let epsilon = isize::from_str_radix(&least_common, 2).unwrap();
 
     println!("Most common digits: {} ({})", most_common, gamma);
-    println!("Least common digits: {} ({})", &least_common, epsilon);
+    println!("Least common digits: {} ({})", least_common, epsilon);
     println!("Power consumption: {}", gamma * epsilon);
 
     // part 2
@@ -77,13 +77,10 @@ pub fn cmd(path: PathBuf) -> Result<(), ParseIntError> {
     let co2_readings = reduce_readings(false, length, diags.clone());
     let co2_scrub_ratings = isize::from_str_radix(co2_readings.as_str(), 2).unwrap();
 
-    println!(
-        "O2 Generator Ratings: {} ({})",
-        &o2_readings, o2_gen_ratings
-    );
+    println!("O2 Generator Ratings: {} ({})", o2_readings, o2_gen_ratings);
     println!(
         "CO2 Scrubber Ratings: {} ({})",
-        &co2_readings, co2_scrub_ratings
+        co2_readings, co2_scrub_ratings
     );
     println!(
         "Life Support Rating: {}",
