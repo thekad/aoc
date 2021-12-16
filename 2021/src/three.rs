@@ -73,19 +73,16 @@ pub fn cmd(path: PathBuf) -> Result<(), ParseIntError> {
 
     // part 2
     let o2_readings = reduce_readings(true, length, diags.clone());
-    let o2_gen_ratings = isize::from_str_radix(o2_readings.as_str(), 2).unwrap();
+    let o2_gen_rating = isize::from_str_radix(o2_readings.as_str(), 2).unwrap();
     let co2_readings = reduce_readings(false, length, diags.clone());
-    let co2_scrub_ratings = isize::from_str_radix(co2_readings.as_str(), 2).unwrap();
+    let co2_scrub_rating = isize::from_str_radix(co2_readings.as_str(), 2).unwrap();
 
-    println!("O2 Generator Ratings: {} ({})", o2_readings, o2_gen_ratings);
+    println!("O2 Generator Rating: {} ({})", o2_readings, o2_gen_rating);
     println!(
-        "CO2 Scrubber Ratings: {} ({})",
-        co2_readings, co2_scrub_ratings
+        "CO2 Scrubber Rating: {} ({})",
+        co2_readings, co2_scrub_rating
     );
-    println!(
-        "Life Support Rating: {}",
-        o2_gen_ratings * co2_scrub_ratings
-    );
+    println!("Life Support Rating: {}", o2_gen_rating * co2_scrub_rating);
 
     Ok(())
 }
