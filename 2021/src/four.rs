@@ -68,7 +68,6 @@ pub fn cmd(path: PathBuf) -> Result<(), ParseIntError> {
             // initialize boards
             let mut _board: Vec<Box> = Vec::new();
             for _row in part.split("\n").collect::<Vec<&str>>() {
-                let mut _boxes: Vec<u8> = Vec::new();
                 for _box in _row.split_whitespace().collect::<Vec<&str>>() {
                     _board.push(Box {
                         number: _box.parse().unwrap(),
