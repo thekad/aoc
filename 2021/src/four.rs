@@ -97,7 +97,7 @@ pub fn cmd(path: PathBuf) -> Result<(), ParseIntError> {
                 println!("We have a winner! Board #{} wins!", idx + 1);
                 let remaining = sum(boards.get(idx).unwrap());
                 let score: i32 = remaining * i32::from(*number);
-                println!("Total unchecked numbers: {}", remaining);
+                println!("Sum of unchecked boxes: {}", remaining);
                 println!("Winning board score: {}", score);
                 break 'numbers;
             };
@@ -129,7 +129,7 @@ pub fn cmd(path: PathBuf) -> Result<(), ParseIntError> {
                 if winners.len() == boards.len() {
                     let remaining = sum(boards.get(idx).unwrap());
                     let score: i32 = remaining * i32::from(*number);
-                    println!("Total unchecked numbers: {}", remaining);
+                    println!("Sum of unchecked boxes: {}", remaining);
                     println!("Winning board score: {}", score);
                     break 'numbers2;
                 }
