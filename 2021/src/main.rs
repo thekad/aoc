@@ -1,3 +1,4 @@
+mod five;
 mod four;
 mod io;
 mod one;
@@ -38,6 +39,13 @@ enum App {
         #[structopt(help = "Path to the bingo input file")]
         path: PathBuf,
     },
+    #[structopt(name = "five", about = "Runs the fifth day's exercise(s)")]
+    Five {
+        #[structopt(parse(from_os_str))]
+        #[structopt(default_value = "data/five.txt")]
+        #[structopt(help = "Path to the hydrothermal line map")]
+        path: PathBuf,
+    },
 }
 
 fn main() -> Result<(), ParseIntError> {
@@ -47,5 +55,6 @@ fn main() -> Result<(), ParseIntError> {
         App::Two { path } => two::cmd(path),
         App::Three { path } => three::cmd(path),
         App::Four { path } => four::cmd(path),
+        App::Five { path } => five::cmd(path),
     };
 }
