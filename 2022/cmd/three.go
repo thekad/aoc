@@ -7,6 +7,7 @@ import (
 	"unicode"
 
 	"github.com/spf13/cobra"
+	"github.com/thekad/aoc/2022/pkg/file"
 )
 
 func contains(needle rune, haystack string) bool {
@@ -33,7 +34,7 @@ var threeCmd = &cobra.Command{
 		var err error
 
 		if len(args) == 0 {
-			filePath, err = dataPath("day-3.txt")
+			filePath, err = file.DataFilePath("day-3.txt")
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -45,7 +46,7 @@ var threeCmd = &cobra.Command{
 		}
 		log.Println(fmt.Sprintf("Loading file %s", filePath))
 
-		lines, err := readLines(filePath)
+		lines, err := file.ReadLines(filePath)
 		if err != nil {
 			log.Fatal(err)
 		}

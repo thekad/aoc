@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 
 	"github.com/spf13/cobra"
+	"github.com/thekad/aoc/2022/pkg/file"
 )
 
 func allDifferent(s string) bool {
@@ -41,7 +42,7 @@ var sixCmd = &cobra.Command{
 		var err error
 
 		if len(args) == 0 {
-			filePath, err = dataPath("day-6.txt")
+			filePath, err = file.DataFilePath("day-6.txt")
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -53,7 +54,7 @@ var sixCmd = &cobra.Command{
 		}
 		log.Println(fmt.Sprintf("Loading file %s", filePath))
 
-		lines, err := readLines(filePath)
+		lines, err := file.ReadLines(filePath)
 
 		if err != nil {
 			log.Fatal(err)

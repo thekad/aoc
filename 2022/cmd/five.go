@@ -9,73 +9,12 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
+	"github.com/thekad/aoc/2022/pkg/file"
+	"github.com/thekad/aoc/2022/pkg/stack"
 )
 
-// RuneStack is a naive stack implementation of type rune
-type RuneStack struct {
-	elements []rune
-}
-
-// NewRuneStack is the constructor
-func NewRuneStack() *RuneStack {
-	rs := RuneStack{
-		elements: []rune{},
-	}
-
-	return &rs
-}
-
-// Push is a naive push implementation
-func (s *RuneStack) Push(e rune) {
-	s.elements = append(s.elements, e)
-}
-
-// IsEmpty returns true if the stack is empty
-func (s *RuneStack) IsEmpty() bool {
-	return len(s.elements) == 0
-}
-
-// Pop is a naive pop implementation
-func (s *RuneStack) Pop() *rune {
-	if s.IsEmpty() {
-		return nil
-	}
-	r := s.elements[len(s.elements)-1]
-	s.elements = s.elements[:len(s.elements)-1]
-
-	return &r
-}
-
-// PopMulti returns a slice of how many items from the top of the stack
-func (s *RuneStack) PopMulti(n int) ([]rune, error) {
-	r := []rune{}
-
-	if n > len(s.elements) {
-		return r, fmt.Errorf("Can't pop %d when len is %d", n, len(s.elements))
-	}
-
-	idx := len(s.elements) - n
-	r = append(r, s.elements[idx:]...)
-	s.elements = s.elements[:idx]
-
-	return r, nil
-}
-
-// Extend will append the given array to the existing array
-func (s *RuneStack) Extend(add []rune) {
-	s.elements = append(s.elements, add...)
-}
-
-func (s *RuneStack) String() string {
-	var r []string
-	for _, e := range s.elements {
-		r = append(r, string(e))
-	}
-	return fmt.Sprintf("%v", r)
-}
-
-func loadStackMap(lines []string) ([]int, map[int]*RuneStack) {
-	rss := map[int]*RuneStack{}
+func loadStackMap(lines []string) ([]int, map[int]*stack.RuneStack) {
+	rss := map[int]*stack.RuneStack{}
 
 	// reverse the array
 	for i, j := 0, len(lines)-1; i < j; i, j = i+1, j-1 {
@@ -89,12 +28,12 @@ func loadStackMap(lines []string) ([]int, map[int]*RuneStack) {
 	coords := map[int]int{1: 1}
 	// we return an ordered key list for convenience
 	keys := []int{1}
-	rss[1] = NewRuneStack()
+	rss[1] = stack.NewRuneStack()
 	var offset = 3
 	for _, h := range headers[1:] {
 		header, _ := strconv.Atoi(h)
 		keys = append(keys, header)
-		rss[header] = NewRuneStack()
+		rss[header] = stack.NewRuneStack()
 		coords[header] = header + offset
 		offset += 3
 	}
@@ -121,7 +60,7 @@ var fiveCmd = &cobra.Command{
 		var err error
 
 		if len(args) == 0 {
-			filePath, err = dataPath("day-5.txt")
+			filePath, err = file.DataFilePath("day-5.txt")
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -133,7 +72,7 @@ var fiveCmd = &cobra.Command{
 		}
 		log.Println(fmt.Sprintf("Loading file %s", filePath))
 
-		chunks, err := readChunks(filePath)
+		chunks, err := file.ReadChunks(filePath, "\n\n")
 
 		if err != nil {
 			log.Fatal(err)

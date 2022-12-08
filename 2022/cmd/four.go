@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
+	"github.com/thekad/aoc/2022/pkg/file"
 )
 
 func rangeToMap(r string) (map[int]bool, error) {
@@ -60,7 +61,7 @@ var fourCmd = &cobra.Command{
 		var err error
 
 		if len(args) == 0 {
-			filePath, err = dataPath("day-4.txt")
+			filePath, err = file.DataFilePath("day-4.txt")
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -72,7 +73,7 @@ var fourCmd = &cobra.Command{
 		}
 		log.Println(fmt.Sprintf("Loading file %s", filePath))
 
-		lines, err := readLines(filePath)
+		lines, err := file.ReadLines(filePath)
 		if err != nil {
 			log.Fatal(err)
 		}

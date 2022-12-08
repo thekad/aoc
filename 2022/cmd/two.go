@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
+	"github.com/thekad/aoc/2022/pkg/file"
 )
 
 type move int
@@ -116,7 +117,7 @@ var twoCmd = &cobra.Command{
 		}
 
 		if len(args) == 0 {
-			filePath, err = dataPath("day-2.txt")
+			filePath, err = file.DataFilePath("day-2.txt")
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -127,7 +128,7 @@ var twoCmd = &cobra.Command{
 			}
 		}
 		log.Println(fmt.Sprintf("Loading file %s", filePath))
-		lines, err := readLines(filePath)
+		lines, err := file.ReadLines(filePath)
 		if err != nil {
 			log.Fatal(err)
 		}

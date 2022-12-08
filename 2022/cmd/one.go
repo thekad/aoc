@@ -8,6 +8,7 @@ import (
 	"strconv"
 
 	"github.com/spf13/cobra"
+	"github.com/thekad/aoc/2022/pkg/file"
 )
 
 func sum(array []int) int {
@@ -26,7 +27,7 @@ var oneCmd = &cobra.Command{
 		var err error
 
 		if len(args) == 0 {
-			filePath, err = dataPath("day-1.txt")
+			filePath, err = file.DataFilePath("day-1.txt")
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -37,7 +38,7 @@ var oneCmd = &cobra.Command{
 			}
 		}
 		log.Println(fmt.Sprintf("Loading file %s", filePath))
-		chunks, err := readChunks(filePath)
+		chunks, err := file.ReadChunks(filePath, "\n\n")
 		if err != nil {
 			log.Fatal(err)
 		}
