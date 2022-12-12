@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
+	"strconv"
 	"strings"
 )
 
@@ -33,6 +34,29 @@ func ReadLines(filePath string) ([]string, error) {
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
 		lines = append(lines, scanner.Text())
+	}
+
+	return lines, err
+}
+
+// ReadLinesAsInt reads the given file and returns an array of int arrays
+func ReadLinesAsInt(filePath string) ([][]int, error) {
+	var lines [][]int
+
+	f, err := os.Open(filePath)
+	if err != nil {
+		return lines, err
+	}
+	defer f.Close()
+
+	scanner := bufio.NewScanner(f)
+	for scanner.Scan() {
+		line := []int{}
+		for _, c := range scanner.Text() {
+			i, _ := strconv.Atoi(string(c))
+			line = append(line, i)
+		}
+		lines = append(lines, line)
 	}
 
 	return lines, err
