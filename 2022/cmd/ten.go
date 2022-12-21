@@ -6,19 +6,19 @@ import (
 	"path/filepath"
 
 	"github.com/spf13/cobra"
-	"github.com/thekad/aoc/2022/cmd/five"
+	"github.com/thekad/aoc/2022/cmd/ten"
 	"github.com/thekad/aoc/2022/pkg/file"
 )
 
-var fiveCmd = &cobra.Command{
-	Use:   "five",
-	Short: "Run the fifth day's exercises",
+var tenCmd = &cobra.Command{
+	Use:   "ten",
+	Short: "Run the tenth day's exercises",
 	Run: func(cmd *cobra.Command, args []string) {
 		var filePath string
 		var err error
 
 		if len(args) == 0 {
-			filePath, err = file.DataFilePath("day-5.txt")
+			filePath, err = file.DataFilePath("day-10.txt")
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -30,16 +30,16 @@ var fiveCmd = &cobra.Command{
 		}
 		log.Println(fmt.Sprintf("Loading file %s", filePath))
 
-		chunks, err := file.ReadChunks(filePath, "\n\n")
+		lines, err := file.ReadLines(filePath)
 
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		five.Main(chunks)
+		ten.Main(lines)
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(fiveCmd)
+	rootCmd.AddCommand(tenCmd)
 }
